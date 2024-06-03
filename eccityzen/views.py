@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 # SDK de Mercado Pago
 import mercadopago
@@ -5,6 +6,8 @@ import mercadopago
 def home(request):
     return render(request, 'home.html')
 
+def payment(request):
+    return render(request, 'check_out_pro.html')
 
 
 # Agrega credenciales
@@ -30,5 +33,7 @@ def checkout(request):
 
     preference_response = sdk.preference().create(preference_data)
     preference = preference_response["response"]
-    print(f'preference: {preference['id']}')
-    return redirect(preference["init_point"], {'preference': preference})
+    
+    return JsonResponse({
+        'id': preference['id']
+    })

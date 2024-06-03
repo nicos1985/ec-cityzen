@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .views import checkout, home
+from .views import checkout, home, payment
 import login
 
 urlpatterns = [
@@ -24,4 +24,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('check-out/', checkout, name='checkout'),
     path('login/', include('login.urls')),
+    path('payment/', payment, name='payment'),
 ]

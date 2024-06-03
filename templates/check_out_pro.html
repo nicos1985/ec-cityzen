@@ -1,17 +1,50 @@
+<!-- payment.html -->
 <!DOCTYPE html>
+{% extends 'base.html'%}
+
+{% load static %}
+
 <html>
-<head>
-    
+    {% block head %}
+    <head>
+        <title>Mercado Pago Checkout</title>
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
+    </head>
+    {% endblock %}
 
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-
-
-</head>
+    {% block content %}
 <body>
-    <h1>Detalles del Producto</h1>
-
-    <div class="cho-container"></div> 
-</body>
-
+    <div id="button-container">
+        
+    </div>
     
-</html5>
+    <script>
+        const mp = new MercadoPago('TEST-269e1c2c-2479-4af9-98c5-167b7ba3f968', {
+            locale: 'es-AR'
+        });
+
+        function initMercadoPagoCheckout() {
+            fetch('/check-out/')
+                .then(response => response.json())
+                .then(preference => {
+                    mp.checkout({
+                        preference: {
+                            id: preference.id
+                        },
+                        render: {
+                            container: '#button-container',
+                            label: 'Pagar',
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+            initMercadoPagoCheckout();
+        });
+    </script>
+</body>
+{% endblock %}
+</html>
