@@ -13,7 +13,7 @@
 <script src="{% static 'lib/DataTables-1.13.1/js/dataTables.bootstrap5.min.js' %}"></script>
 <script src="{% static 'lib/DataTables-1.13.1/plugins/responsive-2.4.0/js/dataTables.responsive.min.js' %}"></script>
 <script src="{% static 'lib/DataTables-1.13.1/plugins/responsive-2.4.0/js/responsive.bootstrap5.min.js' %}"></script>
-
+<script src="https://sdk.mercadopago.com/js/v2"></script> 
 {% endblock %}
 
 {% block content %}
@@ -47,9 +47,23 @@
         <div class="col-sm-12 d-flex justify-content-center">
             <a class="btn btn-primary" href="{% url 'profile' request.user.username %}" style = 'margin-top: 20px;'>Perfil</a>
         </div>
-    
+        <div class="cho-container">
+            
+        </div>
     </div>
 </div>
 {%endif%}
+<script>
+     const mp = new MercadoPago('APP_USR-02840ffd-3871-4f26-bcbc-7ae8176b5694'); 
 
+const checkout = mp.checkout({
+    preference: {
+        id: '{{ preference.id }}' 
+    },
+    render: {
+        container: '.cho-container', 
+        label: 'Pagar',
+    }
+});
+</script>
 {% endblock %}
