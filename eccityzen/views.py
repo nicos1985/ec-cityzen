@@ -33,6 +33,7 @@ def checkout(request):
 
     preference_response = sdk.preference().create(preference_data)
     preference = preference_response["response"]
+    print(f'preference: {preference}')
     
     return JsonResponse({
         'id': preference['id']
