@@ -26,9 +26,9 @@ class Item(models.Model):
 class Preference(models.Model):
     additional_info = models.TextField(blank=True, null=True)
     auto_return = models.CharField(max_length=200)
-    back_urls_failure = models.URLField()
-    back_urls_pending = models.URLField()
-    back_urls_success = models.URLField()
+    back_url_failure = models.URLField()
+    back_url_pending = models.URLField()
+    back_url_success = models.URLField()
     binary_mode = models.BooleanField()
     client_id = models.CharField(max_length=200)
     collector_id = models.BigIntegerField()
